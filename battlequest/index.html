@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>Battle Quest Dice</title>
+    <script type="text/javascript">
+
+        function roll() {
+            // Make it look like the dice are rolling to show that the click registered even if the outcome is the same
+            changeImage("hero", "hero");
+            changeImage("enemy", "monster");
+            setTimeout(function () { changeImage("hero", "shield"); }, 100);
+            setTimeout(function () { changeImage("enemy", "scimitar"); }, 200);
+            setTimeout(function () { changeImage("hero", "sword"); }, 300);
+            setTimeout(function () { changeImage("enemy", "monster"); }, 400);
+            // Display the actual random die rolls
+            setTimeout(function () { changeImage("hero", heroFace(Math.ceil(Math.random() * 6))); }, 500);
+            setTimeout(function () { changeImage("enemy", enemyFace(Math.ceil(Math.random() * 6))); }, 600);
+        }
+
+        function changeImage(die, image) {
+            document.getElementById(die).src = image + ".svg";
+        }
+
+        function heroFace(number) {
+            switch (number) {
+                case 1:
+                    return "hero";
+                case 2:
+                case 3:
+                case 4:
+                    return "shield";
+                case 5:
+                case 6:
+                    return "sword";
+            }
+        }
+
+        function enemyFace(number) {
+            switch (number) {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    return "monster";
+                case 5:
+                case 6:
+                    return "scimitar";
+            }
+        }
+
+    </script>
+</head>
+
+<body style="background-color: black;">
+    <div
+        style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); text-align: center;">
+        <h1 style="color: #f9f9f9;">Battle Quest Dice</h1>
+        <img id="hero" src="hero.svg" width="100px" onclick="roll()" />
+        <img id="enemy" src="monster.svg" width="100" onclick="roll()" />
+    </div>
+</body>
+
+</html>
