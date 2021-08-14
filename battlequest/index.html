@@ -53,11 +53,12 @@
 
 <body style="background-color: black;">
     <div
-        style="position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%); text-align: center;">
-        <h1 style="color: #f9f9f9; font-size: 75px;">Battle Quest Dice</h1>
-        <img id="hero" src="hero.svg" width="250px" onclick="roll()" />
-        <img id="enemy" src="monster.svg" width="250" onclick="roll()" />
-    </div>
+        style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 90vh;">
+        <h1 style="color: #f9f9f9; font-size: 60px;">Battle Quest Dice</h1>
+        <div>
+            <img id="hero" src="hero.svg" width="200px" onclick="roll()" />
+            <img id="enemy" src="monster.svg" width="200px" onclick="roll()" />
+        </div>
 </body>
 
 </html>
