@@ -4,7 +4,7 @@
     <title>Battle Quest Dice</title>
     <script type="text/javascript">
 
-        function roll() {
+        function rollBothDice() {
             // Make it look like the dice are rolling to show that the click registered even if the outcome is the same
             changeImage("hero", "hero");
             changeImage("enemy", "monster");
@@ -13,8 +13,8 @@
             setTimeout(function () { changeImage("hero", "sword"); }, 300);
             setTimeout(function () { changeImage("enemy", "monster"); }, 400);
             // Display the actual random die rolls
-            setTimeout(function () { changeImage("hero", heroFace(Math.ceil(Math.random() * 6))); }, 500);
-            setTimeout(function () { changeImage("enemy", enemyFace(Math.ceil(Math.random() * 6))); }, 600);
+            setTimeout(function () { changeImage("hero", heroFace(rollD6())); }, 500);
+            setTimeout(function () { changeImage("enemy", enemyFace(rollD6())); }, 600);
         }
 
         function changeImage(die, image) {
@@ -48,16 +48,25 @@
             }
         }
 
+        function rollD6() {
+            var array = new Uint32Array(1);
+            do {
+                window.crypto.getRandomValues(array);
+            }
+            while (array[0] >= 4294967292); // 4294967291 is the highest value that gives 5 mod 6; everything over this would make the other values slightly more likely
+            return (array[0] % 6) + 1;
+        }
+
     </script>
 </head>
 
 <body style="background-color: black;">
     <div
         style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 90vh;">
-        <h1 style="color: #f9f9f9; font-size: 60px;">Battle Quest Dice</h1>
+        <h1 style="color: #f9f9f9; font-size: 60px;" onclick="randomNumber(100)">Battle Quest Dice</h1>
         <div>
-            <img id="hero" src="hero.svg" width="200px" onclick="roll()" />
-            <img id="enemy" src="monster.svg" width="200px" onclick="roll()" />
+            <img id="hero" src="hero.svg" width="200px" onclick="rollBothDice()" />
+            <img id="enemy" src="monster.svg" width="200px" onclick="rollBothDice()" />
         </div>
 </body>
 
